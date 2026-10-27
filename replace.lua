@@ -1,3 +1,73 @@
+-- ================= KEY SYSTEM =================
+local REQUIRED_KEY = "CELLO STUDIO" -- Ganti key di sini kalau mau beda
+local isVerified = false
+
+local KeyGui = Instance.new("ScreenGui")
+KeyGui.Name = "Cello_KeySystem"
+KeyGui.ResetOnSpawn = false
+KeyGui.Parent = game:GetService("CoreGui")
+
+local Frame = Instance.new("Frame")
+Frame.Size = UDim2.new(0, 250, 0, 120)
+Frame.Position = UDim2.new(0.5, -125, 0.5, -60)
+Frame.BackgroundColor3 = Color3.fromRGB(25, 25, 30)
+Frame.BorderSizePixel = 0
+Frame.Active = true
+Frame.Draggable = true
+Frame.Parent = KeyGui
+Instance.new("UICorner", Frame).CornerRadius = UDim.new(0, 8)
+
+local Title = Instance.new("TextLabel")
+Title.Size = UDim2.new(1, 0, 0, 30)
+Title.BackgroundColor3 = Color3.fromRGB(15, 15, 20)
+Title.Text = "  Cello Key System"
+Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+Title.TextXAlignment = Enum.TextXAlignment.Left
+Title.Font = Enum.Font.GothamBold
+Title.TextSize = 14
+Title.Parent = Frame
+Instance.new("UICorner", Title).CornerRadius = UDim.new(0, 8)
+
+local Box = Instance.new("TextBox")
+Box.Size = UDim2.new(1, -20, 0, 30)
+Box.Position = UDim2.new(0, 10, 0, 45)
+Box.BackgroundColor3 = Color3.fromRGB(35, 35, 45)
+Box.PlaceholderText = "Masukkan Key..."
+Box.Text = ""
+Box.TextColor3 = Color3.fromRGB(200, 200, 200)
+Box.Font = Enum.Font.Gotham
+Box.TextSize = 12
+Box.Parent = Frame
+Instance.new("UICorner", Box).CornerRadius = UDim.new(0, 6)
+
+local Btn = Instance.new("TextButton")
+Btn.Size = UDim2.new(1, -20, 0, 30)
+Btn.Position = UDim2.new(0, 10, 0, 85)
+Btn.BackgroundColor3 = Color3.fromRGB(50, 200, 100)
+Btn.Text = "Submit"
+Btn.TextColor3 = Color3.fromRGB(255, 255, 255)
+Btn.Font = Enum.Font.GothamBold
+Btn.TextSize = 12
+Btn.Parent = Frame
+Instance.new("UICorner", Btn).CornerRadius = UDim.new(0, 6)
+
+Btn.MouseButton1Click:Connect(function()
+    if Box.Text == REQUIRED_KEY then
+        isVerified = true
+        KeyGui:Destroy()
+    else
+        Box.Text = ""
+        Box.PlaceholderText = "Key Salah!"
+    end
+end)
+
+-- Tahan script biar gak lanjut sebelum key bener
+while not isVerified do
+    task.wait(0.1)
+end
+-- ==============================================
+
+-- ================= SCRIPT REPLACER =================
 local Players = game:GetService("Players")
 local CoreGui = game:GetService("CoreGui")
 
